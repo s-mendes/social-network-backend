@@ -12,10 +12,6 @@ A social network API that allows users to register, create, and like posts.
 
 To use the API, you need to have Node.js and SQLite installed. In the `./src/database/` folder, create the `database.db` file and create the tables according to the queries in the `querys.sql` file. Create the `.env` file and configure it according to the example. Now, in the terminal within the main folder, execute the `npm install` command to install the dependencies and `npm start` to start the API. If everything is working correctly, you will see the message "Server is running on port ****." After this step, all endpoints in the documentation will be available.
 
-## Authentication
-
-Currently, the LabeCommerce API does not require authentication. However, please note that this may change in the future to ensure the security and protection of data.
-
 ## Available Endpoints
 
 Here are the available endpoints in the API:
@@ -50,10 +46,6 @@ Uma API de rede social que permite o usuário cadastrar, criar e curtir publica�
 ## Como Usar a API
 
 Para utilizar a API você precisa ter instalado o Node.js e SQLite, na pasta `./src/database/` crie o arquivo `database.db` e crie as tabelas de acordo com as querys do arquivo `querys.sql`. Crie o arquivo `.env`e configure de acordo com o exemplo. Agora no terminal dentro da pasta principal, execute o comando `npm install` para instalar as dependências e `npm start`para iniciar a API. Caso esteja tudo funcionando, aparecerá a mensagem `Servidor rodando na porta ****`. Após este passo, todos endpoints da documentação estarão disponíveis.
-
-## Autenticação
-
-Atualmente, a API do LabeCommerce não requer autenticação. No entanto, lembre-se de que isso pode ser alterado no futuro para garantir a segurança e a proteção dos dados.
 
 ## Endpoints Disponíveis
 
