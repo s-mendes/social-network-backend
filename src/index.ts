@@ -1,19 +1,21 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import { postRouter } from './router/postRouter'
-import { userRouter } from './router/userRouter'
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { postRouter } from './router/postRouter';
+import { userRouter } from './router/userRouter';
+import { commentsRouter } from './router/commentsRouter';
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 app.listen(process.env.PORT || 3003, () => {
-    console.log(`Servidor rodando na porta ${3003}`)
-})
+  console.log(`Servidor rodando na porta ${3003}`);
+});
 
-app.use("/users", userRouter)
-app.use("/posts", postRouter)
+app.use('/users', userRouter);
+app.use('/posts', postRouter);
+app.use('/comments', commentsRouter);
