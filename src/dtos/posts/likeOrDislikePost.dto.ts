@@ -1,4 +1,4 @@
-import z from 'zod'
+import z from 'zod';
 
 export interface LikeOrDislikePostInputDTO {
   postId: string,
@@ -12,4 +12,4 @@ export const LikeOrDislikePostSchema = z.object({
   postId: z.string().min(1),
   token: z.string().min(1),
   like: z.boolean()
-}).transform(data => data as LikeOrDislikePostInputDTO)
+}).transform(data => data as LikeOrDislikePostInputDTO);
