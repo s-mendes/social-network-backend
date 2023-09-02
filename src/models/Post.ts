@@ -31,6 +31,12 @@ export interface PostDB {
       name: string
     }
   }
+
+  export interface LikeDislike {
+    userId: string,
+    postId: string,
+    like: boolean
+  }
   
   export interface LikeDislikeDB {
     user_id: string,

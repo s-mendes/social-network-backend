@@ -2,6 +2,7 @@ import { PostDatabase } from "../database/PostDatabase";
 import { CreatePostInputDTO, CreatePostOutputDTO } from "../dtos/posts/createPost.dto";
 import { DeletePostInputDTO, DeletePostOutputDTO } from "../dtos/posts/deletePost.dto";
 import { EditPostInputDTO, EditPostOutputDTO } from "../dtos/posts/editPost.dto";
+import { FindLikeDislikeInputDTO, FindLikeDislikeOutputDTO } from "../dtos/posts/findLikeDislike.dto";
 import { GetPostsInputDTO, GetPostsOutputDTO } from "../dtos/posts/getPosts.dto";
 import { LikeOrDislikePostInputDTO, LikeOrDislikePostOutputDTO } from "../dtos/posts/likeOrDislikePost.dto";
 import { ForbiddenError } from "../errors/ForbiddenError";
@@ -54,7 +55,7 @@ export class PostBusiness {
         const { token } = input;
 
         const payload = this.tokenManager.getPayload(token);
-
+        
         if (!payload) {
             throw new UnauthorizedError();
         }
@@ -150,6 +151,29 @@ export class PostBusiness {
 
     };
 
+    public findLikeDislike = async (input: FindLikeDislikeInputDTO): Promise<FindLikeDislikeOutputDTO | undefined> => {
+        const { token, postId } = input;
+
+        const payload = this.tokenManager.getPayload(token);
+
+        if (!payload) {
+            throw new UnauthorizedError();
+        }
+
+        const likeDislikeDB: LikeDislikeDB = {
+            user_id: payload.id,
+            post_id: postId,
+            like: null as any
+        }
+
+        const likeDislikeExists = await this.postDatabase.findLikeDislike(likeDislikeDB);
+
+        const output: FindLikeDislikeOutputDTO | undefined = likeDislikeExists
+
+        return output;
+
+    }
+
     public likeOrDislikePost = async (input: LikeOrDislikePostInputDTO): Promise<LikeOrDislikePostOutputDTO> => {
         const { token, like, postId } = input;
 
@@ -189,9 +213,7 @@ export class PostBusiness {
         if (likeDislikeExists === POST_LIKE.ALREADY_LIKED) {
             if (like) {
                 await this.postDatabase.removeLikeDislike(likeDislikeDB);
-                // console.log("\nAntes do remove\n"+post.getLikes())
                 post.removeLike();
-                // console.log("\nDepois do remove\n"+post.getLikes())
             } else {
                 await this.postDatabase.updateLikeDislike(likeDislikeDB);
                 post.removeLike();
@@ -201,7 +223,6 @@ export class PostBusiness {
             if (like === false) {
                 await this.postDatabase.removeLikeDislike(likeDislikeDB);
                 post.removeDislike();
-                console.log("\nDepois do remove\n"+post.getDislikes())
             } else {
                 await this.postDatabase.updateLikeDislike(likeDislikeDB);
                 post.removeDislike();
