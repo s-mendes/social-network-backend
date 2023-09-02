@@ -1,4 +1,4 @@
-import z from 'zod'
+import z from 'zod';
 
 export interface EditPostInputDTO {
   content: string,
@@ -12,4 +12,4 @@ export const EditPostSchema = z.object({
   content: z.string().min(1),
   token: z.string().min(1),
   idToEdit: z.string().min(1)
-}).transform(data => data as EditPostInputDTO)
+}).transform(data => data as EditPostInputDTO);

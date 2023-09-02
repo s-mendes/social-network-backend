@@ -9,6 +9,6 @@ export interface FindLikeDislikeInputDTO {
 export type FindLikeDislikeOutputDTO = POST_LIKE;
 
 export const FindLikeDislikeSchema = z.object({
-    postId: z.string().min(1),
-    token: z.string().min(1)
-}).transform(data => data as FindLikeDislikeInputDTO)
+  postId: z.string().min(1),
+  token: z.string().min(1)
+}).transform(data => data as FindLikeDislikeInputDTO);
