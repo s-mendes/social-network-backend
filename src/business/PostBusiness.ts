@@ -4,6 +4,7 @@ import { CreatePostInputDTO, CreatePostOutputDTO } from '../dtos/posts/createPos
 import { DeletePostInputDTO, DeletePostOutputDTO } from '../dtos/posts/deletePost.dto';
 import { EditPostInputDTO, EditPostOutputDTO } from '../dtos/posts/editPost.dto';
 import { FindLikeDislikeInputDTO, FindLikeDislikeOutputDTO } from '../dtos/posts/findLikeDislike.dto';
+import { GetPostByIdInputDTO, GetPostByIdOutputDTO } from '../dtos/posts/getPostById.dto';
 import { GetPostsInputDTO, GetPostsOutputDTO } from '../dtos/posts/getPosts.dto';
 import { LikeOrDislikePostInputDTO, LikeOrDislikePostOutputDTO } from '../dtos/posts/likeOrDislikePost.dto';
 import { ForbiddenError } from '../errors/ForbiddenError';
@@ -78,6 +79,41 @@ export class PostBusiness {
     });
 
     const output: GetPostsOutputDTO = posts;
+
+    return output;
+  };
+  public getPostById = async (input: GetPostByIdInputDTO): Promise<GetPostByIdOutputDTO> => {
+    const { id, token } = input;
+
+    const payload = this.tokenManager.getPayload(token);
+        
+    if (!payload) {
+      throw new UnauthorizedError();
+    }
+
+    const postDB = await this.postDatabase.findPostById(id);
+
+    if (!postDB) {
+      throw new NotFoundError('post com id inexistente');
+    }
+
+    const postDBWithCreatorName = await this.postDatabase.getPostWithCreatorNameById(id);
+
+    const posts = postDBWithCreatorName.map(postWithCreatorName => {
+      const post = new Post(
+        postWithCreatorName.id,
+        postWithCreatorName.content,
+        postWithCreatorName.likes,
+        postWithCreatorName.dislikes,
+        postWithCreatorName.created_at,
+        postWithCreatorName.updated_at,
+        postWithCreatorName.creator_id,
+        postWithCreatorName.creator_name
+      );
+      return post.toBusinessModel();
+    });
+
+    const output: GetPostByIdOutputDTO = posts;
 
     return output;
   };
