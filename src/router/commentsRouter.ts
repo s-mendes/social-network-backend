@@ -20,3 +20,7 @@ export const commentsRouter = express.Router();
 
 commentsRouter.post('/:postid', commentsController.createComment);
 commentsRouter.get('/:postid', commentsController.getComments);
+commentsRouter.put('/:commentId', commentsController.editComment);
+commentsRouter.delete('/:idToDelete', commentsController.deleteComment);
+commentsRouter.put('/:id/like', commentsController.likeOrDislikePostComment);
+commentsRouter.get('/likes/:id', commentsController.findLikeDislikeComment);
