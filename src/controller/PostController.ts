@@ -35,6 +35,7 @@ export class PostController {
       }
     }
   };
+  
   public getPosts = async (req: Request, res: Response) => {
     try {
       const input = GetPostsSchema.parse({
@@ -57,6 +58,7 @@ export class PostController {
       }
     }
   };
+
   public getPostById = async (req: Request, res: Response) => {
     try {
       const input = GetPostByIdSchema.parse({
@@ -80,6 +82,7 @@ export class PostController {
       }
     }
   };
+
   public editPost = async (req: Request, res: Response) => {
     try {
       const input = EditPostSchema.parse({
@@ -104,6 +107,7 @@ export class PostController {
       }
     }
   };
+
   public deletePost = async (req: Request, res: Response) => {
     try {
       const input = DeletePostSchema.parse({
@@ -127,6 +131,7 @@ export class PostController {
       }
     }
   };
+
   public findLikeDislike = async (req: Request, res: Response) => {
     try {
       const input = FindLikeDislikeSchema.parse({

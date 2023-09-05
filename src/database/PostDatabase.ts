@@ -34,6 +34,7 @@ export class PostDatabase extends BaseDatabase {
 
     return result as PostDBWithCreatorName[];
   };
+  
   public getPostWithCreatorNameById = async (id: string): Promise<PostDBWithCreatorName[]> => {
     const result = await BaseDatabase
       .connection(PostDatabase.TABLE_POSTS)

@@ -54,6 +54,10 @@ CREATE TABLE
         FOREIGN KEY (comment_id) REFERENCES comments (id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
+SELECT * FROM likes_dislikes_comments WHERE user_id = 'f86bd0ff-5644-4c22-b715-311fb9623c94' AND comment_id = 'f4793522-5d6c-4229-8d15-c374da67e370';
+
+SELECT * FROM likes_dislikes_comments WHERE user_id = 'f86bd0ff-5644-4c22-b715-311fb9623c94' AND comment_id = 'f4793522-5d6c-4229-8d15-c374da67e370';
+
 SELECT * FROM users WHERE email = 'samuel@email.com';
 
 UPDATE users SET role = 'ADMIN' WHERE email = 'samuel@email.com';
